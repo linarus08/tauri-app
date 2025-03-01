@@ -1,0 +1,34 @@
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 10px;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 4px;
+    border: 1px solid #ddd;
+}
+ 
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #ddd;
+}
+
+table th {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+}
+
+table th:nth-child(1), 
+table td:nth-child(1) { 
+  width: 20px; /* Пример изменения ширины конкретной колонки*/
+}

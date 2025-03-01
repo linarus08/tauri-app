@@ -24,8 +24,6 @@ pub fn run() {
             app.set_menu(menu)?;
             app.on_menu_event(move |app_handle: &tauri::AppHandle, event| {
 
-                println!("menu event: {:?}", event.id());
-
                 match event.id().0.as_str() {
                     "openfolder" => {
                         let folder_path = app_handle.dialog().file().blocking_pick_folder();

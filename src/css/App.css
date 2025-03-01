@@ -8,7 +8,6 @@
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 24px;
   font-weight: 400;
 
   color: #0f0f0f;
@@ -22,12 +21,13 @@
 }
 
 .container {
-  margin: 0;
-  padding-top: 10vh;
+  background-color: #a8f9f4;
+  margin-top: 1px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  border: 1px solid;
 }
 
 .logo {
@@ -114,3 +114,10 @@ button {
     background-color: #0f0f0f69;
   }
 }
+
+/* Стили для списка в таблце */
+
+#file-list {
+  font-size: 10px;
+}
+
