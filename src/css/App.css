@@ -21,13 +21,12 @@
 }
 
 .container {
-  background-color: #a8f9f4;
   margin-top: 1px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  border: 1px solid;
+  border: 1px solid #ddd;
 }
 
 .logo {

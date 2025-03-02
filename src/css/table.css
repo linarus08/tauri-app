@@ -4,6 +4,7 @@ table {
     width: 100%;
     border: 1px solid #ddd;
     font-size: 10px;
+    display: none;
 }
 
 table th, table td {
@@ -18,6 +19,7 @@ table tr:nth-child(even) {
 
 table tr:hover {
     background-color: #ddd;
+    color: green;
 }
 
 table th {
