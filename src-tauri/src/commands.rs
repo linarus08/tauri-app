@@ -1,20 +1,15 @@
-use serde::Deserialize;
+use serde::{Serialize, Deserialize};
 // use tauri::utils::pattern;
 use std::collections::HashMap;
 // use std::f32::consts::E;
 // use std::fs;
-use indicatif::{ProgressBar, ProgressStyle};
 use regex::Regex;
 use std::boxed::Box;
 use std::fs::File;
 use std::io::{self, Read};
-use std::time::Duration;
+use tauri::command;
 use zip::read::ZipArchive;
 
-#[derive(Deserialize, Debug)]
-pub struct FilesPayload {
-    files: HashMap<String, String>,
-}
 
 fn get_text(archive: &mut ZipArchive<File>, file: &str) -> io::Result<(String, u32)> {
     // Получаем доступ к файлу внутри архива по его имени.
@@ -28,7 +23,6 @@ fn get_text(archive: &mut ZipArchive<File>, file: &str) -> io::Result<(String, u
 }
 
 fn checker(mut archive: ZipArchive<File>, files: Vec<String>) {
-    
     let pattern_snils = Regex::new(r"(\d{3}-\d{3}-\d{3} \d{2})").unwrap();
     let pattern_fio = Regex::new(r#"(<span class="style_2" style=" direction: ltr;">((?:&#x(?:41[0-9a-f]|42[0-9a-f]|401);-*\.*\s*)+)</span>)"#
     ).unwrap();
@@ -76,11 +70,11 @@ fn get_file_list(
 }
 
 #[tauri::command]
-pub fn packet_processing(payload: FilesPayload) -> Result<(), String> {
-    for (_index, zip_path) in payload.files {
-        let (archive, files) = get_file_list(&zip_path).map_err(|e| e.to_string())?;
-        checker(archive, files);
-        // break;
-    }
-    Ok(())
+pub fn packet_processing(zip_path: String) -> String {
+    let (archive, files) = match get_file_list(&zip_path) {
+        Ok(result) => result,
+        Err(e) => return format!("Ошибка при обработке файла {}: {}", zip_path, e),
+    };
+    checker(archive, files);
+    format!("Файл {} обработан, статус: .", zip_path)
 }

@@ -4,55 +4,25 @@ import { useMemo } from "react";
 import "../css/table.css";
 
 const BasicTable = ({ data }) => {
-  const tableData = useMemo(() => {
-    return Object.entries(data).map(([key, value]) => ({
-      col1: key,
-      col2: value,
-    }));
-  }, [data]);
-  const columns = useMemo(
-    () => [
-      { Header: "№", accessor: "col1" },
-      { Header: "Файл", accessor: "col2" },
-    ],
-    []
-  );
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data: tableData });
+  const tableData = Object.entries(data).map(([id, filePath]) => ({
+    id: parseInt(id), // Преобразуем id из строки в число
+    filePath: filePath,
+  }));
   return (
-    <table {...getTableProps()}>
+    <table>
       <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-            {headerGroup.headers.map((column) => {
-              const props = {
-                colSpan: column.colSpan,
-                role: "columnheader",
-              };
-              return (
-                <th {...props} key={column.id}>
-                  {column.render("Header")}
-                </th>
-              ); // Передаем key отдельно
-            })}
+        <tr>
+          <th>№</th>
+          <th>Файл</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tableData.map(item => (
+          <tr className="row" key={item.id}>
+            <td className="fl-id">{item.id}</td>
+            <td className="fl-nm">{item.filePath}</td>
           </tr>
         ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()} key={row.id}>
-              {" "}
-              {/* Передаем key отдельно */}
-              {row.cells.map((cell) => (
-                <td {...cell.getCellProps()} key={cell.column.id}>
-                  {cell.render("Cell")}
-                </td>
-              ))}
-            </tr>
-          );
-        })}
       </tbody>
     </table>
   );

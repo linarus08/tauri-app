@@ -10,16 +10,16 @@ table {
 table th, table td {
     text-align: left;
     padding: 4px;
-    border: 1px solid #ddd;
+    border: 1px solid #e79c9c;
 }
  
 table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #a6f84e;
 }
 
 table tr:hover {
     background-color: #ddd;
-    color: green;
+    color: rgb(93, 103, 3);
 }
 
 table th {
@@ -33,4 +33,13 @@ table th {
 table th:nth-child(1), 
 table td:nth-child(1) { 
   width: 20px; /* Пример изменения ширины конкретной колонки*/
+}
+
+.td[role="cell"] {
+    background-color: #4CAF50;
+}
+
+.error {
+    background-color: #FFCCCC;  /* светло-красный фон */
+    color: #a00;                /* красный текст */
 }
